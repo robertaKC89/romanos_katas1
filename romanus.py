@@ -1,5 +1,7 @@
 # funcion que me debe convertir numero en romano
-"""->Restricciones:
+def convertir_en_romano(numero):
+    """
+    ->Restricciones:
         - Es un número natural
         - El número está entre 0 y 3999
         - no es negativo
@@ -18,8 +20,6 @@
         2a. Si es válido: lo convierto
         2b. Si no es válido: muestro un error
     """
-
-def convertir_en_romano(numero):
 #ESTA ES UNA DE LAS OPCIONES QUE NOS PUEDE SERVIR
     #try:
     #    numero_validado = int (numero)
