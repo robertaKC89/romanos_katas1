@@ -41,4 +41,19 @@ def convertir_en_romano(numero):
 print (convertir_en_romano (9000))
 print (convertir_en_romano (3))
 
-    
+# SIGUIENTE PASO ES HACER LA CONVERSION NUMERO -> TEXTO 
+# Probamos de hacerlo con un diccionario y lo hacemos ahora xk antes debía descartar si no era un num. 
+simbolos = {
+    'I': 1,
+    'V': 5,
+    'X': 10,
+    'L': 50,
+    'C': 100,
+    'D': 500,
+    'M': 1000
+}
+
+# SIGUIENTE PASO ES DESCOMPONER 'numero' en UD, DECENTAS, CENTENAS Y UD. DE MILLAR
+# opcion 1: division entera + modulo en cascada
+# opcion 2: convertir en cadena y en funcion de longitud y posición obtener ud, d, c, y ud. millar 
+
