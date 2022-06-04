@@ -18,7 +18,7 @@ def convertir_en_romano(numero):
     ->Pasos:
         1. Validar la entrada
         2a. Si es válido: lo convierto
-        2b. Si no es válido: muestro un error
+        2b. Si no es válido ya no sigo: muestro un error
     """
 #ESTA ES UNA DE LAS OPCIONES QUE NOS PUEDE SERVIR
     #try:
@@ -38,8 +38,8 @@ def convertir_en_romano(numero):
         return 'el num no es válido. debe ser mayor que uno y menor que 4000'
 
 # llamo a la funcion para utilizarla (ojo con restricciones, no pondré print'a' o '-3' xk me dará error)
-print (convertir_en_romano (9000))
-print (convertir_en_romano (3))
+#print (convertir_en_romano (9000))
+#print (convertir_en_romano (3))
 
 # SIGUIENTE PASO ES HACER LA CONVERSION NUMERO -> TEXTO 
 # Probamos de hacerlo con un diccionario y lo hacemos ahora xk antes debía descartar si no era un num. 
@@ -53,7 +53,32 @@ simbolos = {
     'M': 1000
 }
 
-# SIGUIENTE PASO ES DESCOMPONER 'numero' en UD, DECENTAS, CENTENAS Y UD. DE MILLAR
-# opcion 1: division entera + modulo en cascada
+# SIGUIENTE PASITO ES DESCOMPONER 'numero' en UD, DECENTAS, CENTENAS Y UD. DE MILLAR
+# opcion 1: division entera + módulo o residuo en cascada 
 # opcion 2: convertir en cadena y en funcion de longitud y posición obtener ud, d, c, y ud. millar 
+# IMP. El formato me tiene que servir para todos igual!
+
+# opcion 1: division entera + módulo/residuo en cascada: 
+    divisores = [1000, 100, 10, 1]
+    factores = [] 
+    numero = 1123
+    for divisor in divisores:
+        cociente = numero // divisor 
+        resto = numero % divisor
+        factores.append (cociente)
+        numero = resto
+    return factores  
+    
+#CON EL FOR ESTAMOS ITERANDO DE LA SIGUIENTE MANERA (podría hacerse con while tambien): 
+#1123 / 1000 = 1  >>>> he impreso este valor
+#1123 % 1000 = 123 
+#123 / 100= 1 >>>>> he impreso este valor
+#123 % 100= 23
+#23 / 10 = 2 >>>>> he impreso este valor 
+#23 % 10 = 3
+#3 / 1 = 3 >>>>> he impreso este valor 
+#3 % 1 = 3
+
+
+print (convertir_en_romano (1123))
 
