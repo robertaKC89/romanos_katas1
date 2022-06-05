@@ -20,6 +20,7 @@ def convertir_en_romano(numero):
         2a. Si es válido: lo convierto
         2b. Si no es válido ya no sigo: muestro un error
     """
+
 #ESTA ES UNA DE LAS OPCIONES QUE NOS PUEDE SERVIR
     #try:
     #    numero_validado = int (numero)
@@ -37,21 +38,9 @@ def convertir_en_romano(numero):
     if numero < 1 or numero > 3999:
         return 'el num no es válido. debe ser mayor que uno y menor que 4000'
 
-# llamo a la funcion para utilizarla (ojo con restricciones, no pondré print'a' o '-3' xk me dará error)
+#llamo a la funcion para utilizarla (ojo con restricciones, no pondré print'a' o '-3' xk me dará error)
 #print (convertir_en_romano (9000))
 #print (convertir_en_romano (3))
-
-# SIGUIENTE PASO ES HACER LA CONVERSION NUMERO -> TEXTO 
-# Probamos de hacerlo con un diccionario y lo hacemos ahora xk antes debía descartar si no era un num. 
-simbolos = {
-    'I': 1,
-    'V': 5,
-    'X': 10,
-    'L': 50,
-    'C': 100,
-    'D': 500,
-    'M': 1000
-}
 
 # SIGUIENTE PASITO ES DESCOMPONER 'numero' en UD, DECENTAS, CENTENAS Y UD. DE MILLAR
 # opcion 1: division entera + módulo o residuo en cascada 
@@ -61,13 +50,11 @@ simbolos = {
 # opcion 1: division entera + módulo/residuo en cascada: 
     divisores = [1000, 100, 10, 1]
     factores = [] 
-    numero = 1123
     for divisor in divisores:
         cociente = numero // divisor 
         resto = numero % divisor
         factores.append (cociente)
-        numero = resto
-    return factores  
+        numero = resto 
     
 #CON EL FOR ESTAMOS ITERANDO DE LA SIGUIENTE MANERA (podría hacerse con while tambien): 
 #1123 / 1000 = 1  >>>> he impreso este valor
@@ -79,6 +66,23 @@ simbolos = {
 #3 / 1 = 3 >>>>> he impreso este valor 
 #3 % 1 = 3
 
+# Ya tenemos la descomposición, AHORA VAMOS A ACCEDER POR POSICIÓN PARA CONVERTIR A TEXTO ROMANO!
+# Se plantea una LISTA:
+    millares = [ "", "M", "MM", "MMM" ]
+    centenas = [ "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" ]
+    decenas = [ "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" ]
+    unidades = [ "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" ]
 
-print (convertir_en_romano (1123))
+#accediendo por posición quedaria -> resultado de ej.'millares' por lo que tenga en posición de factores
+    r_millares = millares [factores [0]] 
+    r_centenas = centenas [factores [1]]
+    r_decenas = decenas [factores [2]]
+    r_unidades = unidades [factores [3]]
 
+    return r_millares + r_centenas + r_decenas + r_unidades
+
+# y llamo a la función para comprobar si funciona con cualquier num
+print (convertir_en_romano (3))
+print (convertir_en_romano (555))
+print (convertir_en_romano (2788))
+print (convertir_en_romano (22))
