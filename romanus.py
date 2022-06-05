@@ -84,5 +84,5 @@ def convertir_en_romano(numero):
 # y llamo a la función para comprobar si funciona con cualquier num
 print (convertir_en_romano (3))
 print (convertir_en_romano (555))
-print (convertir_en_romano (2788))
+print (convertir_en_romano (200008))
 print (convertir_en_romano (22))
