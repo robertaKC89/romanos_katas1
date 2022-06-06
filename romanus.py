@@ -20,27 +20,31 @@ def convertir_en_romano(numero):
         2a. Si es válido: lo convierto
         2b. Si no es válido ya no sigo: muestro un error
     """
+# Ya tenemos la descomposición, SE PODRÁ ACCEDER POR POSICIÓN PARA CONVERTIR A TEXTO ROMANO!
+# Se plantea una LISTA:
+    millares = [ "", "M", "MM", "MMM" ]
+    centenas = [ "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" ]
+    decenas = [ "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" ]
+    unidades = [ "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" ]
+#HAGO UNA LISTA DE LISTAS (conversores tiene 4 listas)
+    conversores = [millares, centenas, decenas, unidades]
 
-#ESTA ES UNA DE LAS OPCIONES QUE NOS PUEDE SERVIR
+#UNA DE LAS OPCIONES QUE NOS PUEDE SERVIR PARA VALIDAR ENTRADA
     #try:
     #    numero_validado = int (numero)
     #except ValueError:
     #    raise ValueError (f'{numero} no es num valido')
 
-#ESTA ES OTRA OPCIÓN QUE NOS PUEDE SERVIR
+#OTRA OPCIÓN QUE NOS PUEDE SERVIR PARA VALIDAR ENTRADA
     # if numero > 0 and numero < 4000:
     #     return 'OK'
     # return 'el num no es valido, debe ser positivo y menor que 4000'
 
-#ESTA ES OTRA OPCION BUENA Y NOS QUEDAMOS CON ESTA!!! Pero convirtiendo a not para ahorrarme el else
-    if not isinstance (numero, int):
-        return 'no has introducido un numero' 
+#OTRA OPCION PARA VALIDAR ENTRADA Y USAMOS ESTA!!! Pero convirtiendo a not para ahorrarme el else
+    if not isinstance(numero, int):
+        return "No has introducido un número"
     if numero < 1 or numero > 3999:
-        return 'el num no es válido. debe ser mayor que uno y menor que 4000'
-
-#llamo a la funcion para utilizarla (ojo con restricciones, no pondré print'a' o '-3' xk me dará error)
-#print (convertir_en_romano (9000))
-#print (convertir_en_romano (3))
+        return "El número introducido no es válido (debe ser positivo y menor que 4000)"
 
 # SIGUIENTE PASITO ES DESCOMPONER 'numero' en UD, DECENTAS, CENTENAS Y UD. DE MILLAR
 # opcion 1: division entera + módulo o residuo en cascada 
@@ -49,40 +53,40 @@ def convertir_en_romano(numero):
 
 # opcion 1: division entera + módulo/residuo en cascada: 
     divisores = [1000, 100, 10, 1]
-    factores = [] 
+    factores = []
     for divisor in divisores:
-        cociente = numero // divisor 
+        cociente = numero // divisor
         resto = numero % divisor
-        factores.append (cociente)
-        numero = resto 
-    
-#CON EL FOR ESTAMOS ITERANDO DE LA SIGUIENTE MANERA (podría hacerse con while tambien): 
-#1123 / 1000 = 1  >>>> he impreso este valor
-#1123 % 1000 = 123 
-#123 / 100= 1 >>>>> he impreso este valor
-#123 % 100= 23
-#23 / 10 = 2 >>>>> he impreso este valor 
-#23 % 10 = 3
-#3 / 1 = 3 >>>>> he impreso este valor 
-#3 % 1 = 3
+        factores.append(cociente)
+        numero = resto
+    #CON EL FOR ESTAMOS ITERANDO DE LA SIGUIENTE MANERA (podría hacerse con while tambien): 
+    #1123 / 1000 = 1  >>>> he impreso este valor
+    #1123 % 1000 = 123 
+    #123 / 100= 1 >>>>> he impreso este valor
+    #123 % 100= 23
+    #23 / 10 = 2 >>>>> he impreso este valor 
+    #23 % 10 = 3
+    #3 / 1 = 3 >>>>> he impreso este valor 
+    #3 % 1 = 3
 
-# Ya tenemos la descomposición, AHORA VAMOS A ACCEDER POR POSICIÓN PARA CONVERTIR A TEXTO ROMANO!
-# Se plantea una LISTA:
-    millares = [ "", "M", "MM", "MMM" ]
-    centenas = [ "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" ]
-    decenas = [ "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" ]
-    unidades = [ "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" ]
+#la posicion corresponde al conversor que debo acceder de lista de listats conversores de arriba
+#el resultado se que es cadena, por lo que la dejo vacía y ya veré que pinto de valores
+#enumerate útil xk devuelve TUPLA con un contador que empieza en 0 y los valores del objeto iterable
+    resultado = ''
+    for pos, factor in enumerate(factores):
+        resultado = resultado + conversores[pos][factor]
+    return resultado
 
-#accediendo por posición quedaria -> resultado de ej.'millares' por lo que tenga en posición de factores
-    r_millares = millares [factores [0]] 
-    r_centenas = centenas [factores [1]]
-    r_decenas = decenas [factores [2]]
-    r_unidades = unidades [factores [3]]
+#otra manera de acceder por posición-> resultado de ej.'millares' por lo que tenga en posición de factores
+    #r_millares = millares [factores [0]] 
+    #r_centenas = centenas [factores [1]]
+    #r_decenas = decenas [factores [2]]
+    #r_unidades = unidades [factores [3]]
 
-    return r_millares + r_centenas + r_decenas + r_unidades
+    #return f'{r_millares} {r_centenas} {r_decenas} {r_unidades}'
 
 # y llamo a la función para comprobar si funciona con cualquier num
 print (convertir_en_romano (3))
 print (convertir_en_romano (555))
-print (convertir_en_romano (200008))
+print (convertir_en_romano (208))
 print (convertir_en_romano (22))
