@@ -90,3 +90,8 @@ print (convertir_en_romano (3))
 print (convertir_en_romano (555))
 print (convertir_en_romano (208))
 print (convertir_en_romano (22))
+
+#AL FINAL HEMOS COMPRIMIDO LA FUNCION AL MÁXIMO CON LISTAS YA QUE ESTAMOS ANTE SISTEMAS DE NUMEROS POSICIONALES Y LO MÁS FÁCIL ES LISTA. 
+
+# ------------------------------------- PRIMERA MITAD DEL PROGRAMA CONVERSION ENTERO A ROMANO HECHA --------------------------------
+
