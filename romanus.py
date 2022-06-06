@@ -95,3 +95,35 @@ print (convertir_en_romano (22))
 
 # ------------------------------------- PRIMERA MITAD DEL PROGRAMA CONVERSION ENTERO A ROMANO HECHA --------------------------------
 
+def convertir_en_numero (romano):
+    """
+    MCXXIII: 1123
+        - de izquierda a derecha -> lo hago con el bucle for
+        - convertir cada letra en su valor -> lo hago con el diccionario
+        - sumo los valores si a la izquierda hay un dígito mayor que a la derecha
+            - VI: sumo ==> 6
+        - resto si el valor de la izquierda es menor que el de la derecha
+            - IV: resto ==> 4
+
+        1. leo una letra y guardo su valor (letra1)
+        2. leo otra letra (letra2)
+            2a. si letra2 > letra1 =>  resultado = letra2 - letra1
+            2b. si no => resultado letra2 + letra1
+    """
+    #1º ME DEFINO DICCIONARIO PARA ACCEDER POR KEY
+    digitos_romanos = {
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000
+    }
+
+    resultado = 0
+    #2ºrecorro la cadena para llevarla a un num.y esta coincide con la key de mi diccionario y luego me irá sumando a resultado la iteracion de cada letra que le asigna el valor
+    for letra in romano:
+        resultado = resultado + digitos_romanos[letra]
+    return resultado
+print (convertir_en_numero  ('MCXXIII'))
