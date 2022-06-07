@@ -122,8 +122,16 @@ def convertir_en_numero (romano):
     }
 
     resultado = 0
-    #2ºrecorro la cadena para llevarla a un num.y esta coincide con la key de mi diccionario y luego me irá sumando a resultado la iteracion de cada letra que le asigna el valor
+    anterior = 0
+    #2ºrecorro la cadena para llevarla a num.y esta coincide con la key de mi diccionario y luego me irá sumando a resultado la iteracion de cada letra que le asigna el valor
+    # lo que hago todo el rato es comparar las letras de dos en dos y guardando anterior para ver si sumo o resto con el valor actual
     for letra in romano:
-        resultado = resultado + digitos_romanos[letra]
+        actual = digitos_romanos [letra]
+        if anterior >= actual:
+            resultado = resultado + actual
+        else:
+            resultado = resultado - anterior
+            resultado = resultado + (actual - anterior)
+        anterior = actual  
     return resultado
 print (convertir_en_numero  ('MCXXIII'))
