@@ -20,6 +20,30 @@ class RomanusTest (unittest.TestCase):
         self.assertEqual (convertir_en_numero('D'), 500)
         self.assertEqual (convertir_en_numero('M'), 1000)
 
+#defino otro test
+    def test_numeros_basicos(self):
+        self.assertEqual(convertir_en_numero("IV"), 4)
+        self.assertEqual(convertir_en_numero("IX"), 9)
+        self.assertEqual(convertir_en_numero("XL"), 40)
+        self.assertEqual(convertir_en_numero("CCV"), 205)
+        self.assertEqual(convertir_en_numero("MCXXIII"), 1123)
+
+# defino otro test para casos anómalos (puestos en romanus.py para detectar ValueError)
+# pongo assertRaises y me pide: ValueError, función, parámetro. 
+    def test_no_resta_mas_de_un_orden_de_magnitud(self):
+        self.assertRaises(ValueError, convertir_en_numero, "IC")
+        self.assertRaises(ValueError, convertir_en_numero, "VC")
+    
+# defino otro test para casos anómalos
+# con with me ahorro escribbir tanto y funciona igual 
+    def test_no_restas_signos_multiplos_de_cinco(self):
+        with self.assertRaises(ValueError):
+            convertir_a_numero ("VX")
+            convertir_a_numero ("LC")
+            convertir_a_numero ("DM")
+
+    
+
 # si me llamas desde la linea de comandos tira para adelante el metodo main desde esta libreria para cojer las clases tipo test y ejecutarlos
 # método __main__ es el nombre que Python le da siempre al 1r archivo que llamo esde la línia de comandos
 # si el archivo lo llamo desde una importación se llamará por su nombre: Ej. import marta = nombre marta
