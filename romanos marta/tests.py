@@ -1,11 +1,14 @@
+#RESUMEN: CON LOS TEST NO ME PREOCUPO DE PASAR TODAS LAS PRUEBAS DE MIS PROGRAMAS DE FORMA MANUAL!!!
+
 #importo de la libreria python la herramienta unittest
 import unittest
-#desde mi archivo romanus importo la funcion que quiera utilizar para que Python interprete toda y la pueda probar
+#desde mi archivo romanus importo la funcion que quiera utilizar para que Python interprete y la pueda probar
 from romanus import convertir_en_numero
 
-#voy a utilizar una class que hereda de una class genérica de la librería unittest que se llama .TestC
+#voy a crear una class (RomanusTest) que hereda de una class genérica de la librería unittest que se llama .TestCase
 #voy a poder pasar aserciones para, pasando datos poder comparar si mayor que, igual, si hay error,etc.
-#defino por ejemplo una coleccion de test_unidades para comprobar si he definido bien unidades
+#defino por ejemplo una coleccion de test_unidades para comprobar si he definido bien mis unidades
+#como REGLA las class acaben en test y los métodos que ejecuto empiezan por test
 class RomanusTest (unittest.TestCase):
     def test_unidades (self):
     #defino para ver si un resultado es igual a algo que yo conozca-> ejemplo I = 1
@@ -17,7 +20,9 @@ class RomanusTest (unittest.TestCase):
         self.assertEqual (convertir_en_numero('D'), 500)
         self.assertEqual (convertir_en_numero('M'), 1000)
 
-# si me llamas desde la linea de comandos ejecuta el metodo main desde esta libreria para cojer las clases tipo test y ejecutarlos
+# si me llamas desde la linea de comandos tira para adelante el metodo main desde esta libreria para cojer las clases tipo test y ejecutarlos
+# método __main__ es el nombre que Python le da siempre al 1r archivo que llamo esde la línia de comandos
+# si el archivo lo llamo desde una importación se llamará por su nombre: Ej. import marta = nombre marta
+# si pongo condicion name == main significa que solo quiero que se ejecute si es el 1r archivo, sino no se ejecutará 
 if __name__ == '__main__':
     unittest.main()
-
