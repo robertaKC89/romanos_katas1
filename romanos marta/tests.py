@@ -35,7 +35,7 @@ class RomanusTest (unittest.TestCase):
         self.assertRaises(ValueError, convertir_en_numero, "VC")
     
 # defino otro test para casos anómalos
-# con with me ahorro escribbir tanto y funciona igual 
+# con with me ahorro escribir tanto y funciona igual 
     def test_no_restas_signos_multiplos_de_cinco(self):
         with self.assertRaises(ValueError):
             convertir_a_numero ("VX")
