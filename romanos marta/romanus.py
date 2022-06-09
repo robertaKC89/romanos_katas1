@@ -86,10 +86,10 @@ def convertir_en_romano(numero):
     #return f'{r_millares} {r_centenas} {r_decenas} {r_unidades}'
 
 # y llamo a la función para comprobar si funciona con cualquier num
-print (convertir_en_romano (3))
-print (convertir_en_romano (555))
-print (convertir_en_romano (208))
-print (convertir_en_romano (22))
+#print (convertir_en_romano (3))
+#print (convertir_en_romano (555))
+#print (convertir_en_romano (208))
+#print (convertir_en_romano (22))
 
 #AL FINAL HEMOS COMPRIMIDO LA FUNCION AL MÁXIMO CON LISTAS YA QUE ESTAMOS ANTE SISTEMAS DE NUMEROS POSICIONALES Y LO MÁS FÁCIL ES LISTA. 
 
@@ -150,16 +150,23 @@ def convertir_en_numero (romano):
 
         # actual - anterior*10 (para compararlos y ver si puedo restar) ---> si cero o negativo OK
         #                                                               ---> si positivo KO
-        # imp.! anterior *10 siempre será cero ya que es el primero que entra al validador, por lo que hau que meterlo en la condicion 
+        # imp! anterior *10 siempre será cero ya que es el primero que entra al validador, por lo que hau que meterlo en la condicion 
         # es decir, con 3 valores a comparar busco la condicion de error y si no salta hará la resta:
-            if anterior > 0 and anterior*10 > actual:
+            if 0 < anterior*10 < actual:
                 raise ValueError ('no se puede restar mas de un orden de magnitud')
-                
+        # en los tests hemos podido ver que debíamos añadir esta condición 
+            if anterior in (5, 50, 500):
+                raise ValueError ('no se puede restar un múltiplo de 5*')
+   
             resultado = resultado - anterior
             resultado = resultado + (actual - anterior)
         anterior = actual  
-    return resultado 
-print (convertir_en_numero ('IC'))
+    return resultado
+#pongo esta condicion porque no quiero que en la llamada para los tests me ejecute esta parte 
+if __name__ == '__main__':
+    print (convertir_en_numero ('MCXXIII'))
+    print (convertir_en_numero ('XXXI'))
+    print (convertir_en_numero ('IV'))
 
 
 
