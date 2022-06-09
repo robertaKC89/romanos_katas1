@@ -35,11 +35,24 @@ class RomanusTest (unittest.TestCase):
         self.assertRaises(ValueError, convertir_en_numero, "VC")
     
 # defino otro test para casos anómalos
-# también puedo invertir el orden definiendo 1º test que se que mi programa tiene que hacer que funcione
+# también puedo invertir el orden definiendo 1º el test que se que mi programa tiene que hacer que funcione
 # es técnica TDD = desarrollo basado en problemas
 # 1º generas la prueba, compruebas que falla y luego haces el programa que arregla este problema
     def test_no_restas_signos_multiplos_de_cinco(self):
         self.assertRaises(ValueError, convertir_en_numero, "VX")
+        self.assertRaises(ValueError, convertir_en_numero, "LC")
+        self.assertRaises(ValueError, convertir_en_numero, "DM")
+
+# otro test para alguna prueba de resta que no pueda hacer de forma consecutiva
+    def test_no_restas_consecutivas(self):
+        self.assertRaises(ValueError, convertir_en_numero, "MIXC")
+
+# otro test para num consecutivos (ya que nos vamos encontrando con más situaciones de error)
+    def test_no_repetir_simbolos_resta(self):
+        self.assertRaises(ValueError, convertir_en_numero, "CCM")
+        self.assertRaises(ValueError, convertir_en_numero, "IIC")
+        self.assertRaises(ValueError, convertir_en_numero, "XXC")
+        self.assertRaises(ValueError, convertir_en_numero, "MMCCM")
       
 
 # si me llamas desde la linea de comandos tira para adelante el metodo main desde esta libreria para cojer las clases tipo test y ejecutarlos
