@@ -123,43 +123,51 @@ def convertir_en_numero (romano):
 
     resultado = 0
     anterior = 0
+    cuenta_resta = 0 
     #recorro la cadena para llevarla a num.y esta coincide con la key de mi diccionario y luego me irá sumando a resultado la iteracion de cada letra que le asigna el valor
     #lo que hago todo el rato es comparar las letras de dos en dos y guardando anterior para ver si sumo o resto con el valor actual
     for letra in romano:
         actual = digitos_romanos [letra]
         if anterior >= actual:
             resultado = resultado + actual
+            cuenta_resta = 0
         else:
-        #valido si resta es posible ya que no puedo restar si hay más de un orden de magnitud entre anterior y actual
-        #no puedo restar de ud a centenas por ejemplo ya que hay más de un orden de magnitud.  
-        #10  10  10  10 -> dato imp. es que entre magnitudes se llevan 10!
-        #1123 = 1*10^3 + 1*10^2 + 2*10^1 + 3*10^1 = 1000 + 100 + 20 + 3
-        #estoy en el punto de que anterior < actual
-        #COMPROVACIONES QUE FUNCIONAN Y QUE NO:
-         #si: IV  ---   anterior=1,   actual=5         1*10 ---- 5
-         #si: IX  ---   anterior=1,   actual=10        10 ---- 10
-         #si: CM  ---   anterior=100, actual=1000    1000 ---- 1000
-         #no: IC  ---   anterior=1,   actual=100      10 ---- 100
-         #no: XM  ---   anterior=10,  actual=1000    100 ---- 1000
-         #no: I   ---   anterior=0,   actual=1         0 ---- 1
-         #no: X   ---   anterior=0,   actual=10        0 ---- 10
+            """
+        - valido si resta es posible ya que no puedo restar si hay más de un orden de magnitud entre anterior y actual
+        - no puedo restar de ud a centenas por ejemplo ya que hay más de un orden de magnitud.  
+        - 10  10  10  10 -> dato imp. es que entre magnitudes se llevan 10!
+        - 1123 = 1*10^3 + 1*10^2 + 2*10^1 + 3*10^1 = 1000 + 100 + 20 + 3
+        - estoy en el punto de que anterior < actual
+        - COMPROVACIONES QUE FUNCIONAN Y QUE NO:
+         - si: IV  ---   anterior=1,   actual=5         1*10 ---- 5
+         - si: IX  ---   anterior=1,   actual=10        10 ---- 10
+         - si: CM  ---   anterior=100, actual=1000    1000 ---- 1000
+         - no: IC  ---   anterior=1,   actual=100      10 ---- 100
+         - no: XM  ---   anterior=10,  actual=1000    100 ---- 1000
+         - no: I   ---   anterior=0,   actual=1         0 ---- 1
+         - no: X   ---   anterior=0,   actual=10        0 ---- 10
 
-        # IV -> otra opción de operación aritmética:
-         # anterior=0, actual=1 ----    0 <= 1 ////  1 - 0 > 0
-         # anterior=1, actual=5         0 <= 10 //// 10 > 0
+        -  IV -> otra opción de operación aritmética:
+        -  anterior=0, actual=1 ----    0 <= 1 ////  1 - 0 > 0
+        -  anterior=1, actual=5         0 <= 10 //// 10 > 0
 
-        # actual - anterior*10 (para compararlos y ver si puedo restar) ---> si cero o negativo OK
-        #                                                               ---> si positivo KO
-        # imp! anterior *10 siempre será cero ya que es el primero que entra al validador, por lo que hau que meterlo en la condicion 
-        # es decir, con 3 valores a comparar busco la condicion de error y si no salta hará la resta:
-            if 0 < anterior*10 < actual:
-                raise ValueError ('no se puede restar mas de un orden de magnitud')
-        # en los tests hemos podido ver que debíamos añadir esta condición 
+        -  actual - anterior*10 (para compararlos y ver si puedo restar) ---> si cero o negativo OK
+        -                                                                ---> si positivo KO
+        -  imp! anterior *10 siempre será cero ya que es el primero que entra al validador, por lo que hau que meterlo en la condicion 
+        -  es decir, con 3 valores a comparar busco la condicion de error y si no salta hará la resta:
+        """
+            #en los tests hemos podido ver que debíamos añadir esta condición       
             if anterior in (5, 50, 500):
                 raise ValueError ('no se puede restar un múltiplo de 5*')
-   
+
+            if 0 < anterior*10 < actual:
+                raise ValueError ('no se puede restar mas de un orden de magnitud')
+        
             resultado = resultado - anterior
             resultado = resultado + (actual - anterior)
+            # aquí ya ha pasado por resta por tanto puedo decir:
+            cuenta_resta = cuenta_resta + 1
+
         anterior = actual  
     return resultado
 #pongo esta condicion porque no quiero que en la llamada para los tests me ejecute esta parte 
